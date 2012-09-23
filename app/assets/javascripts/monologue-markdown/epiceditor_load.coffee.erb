@@ -1,0 +1,31 @@
+$(document).ready ->
+  textarea = $("#post_posts_revision_content")
+  $(textarea).after("<div id='epiceditor'></div>")
+  $(textarea).hide()
+  opts =
+    container: "epiceditor"
+    basePath: ""
+    clientSideStorage: true
+    localStorageName: "epiceditor"
+    parser: marked
+    file:
+      name: "epiceditor"
+      defaultContent: $(textarea).val()
+      autoSave: 100
+
+    theme:
+      base: "<%= asset_path("monologue-markdown/epiceditor/themes/base/epiceditor.css")%>"
+      preview: "<%= asset_path("monologue-markdown/epiceditor/themes/preview/github.css")%>"
+      editor: "<%= asset_path("monologue-markdown/epiceditor/themes/editor/epic-dark.css")%>"
+
+    focusOnLoad: false
+    shortcut:
+      modifier: 18
+      fullscreen: 70
+      preview: 80
+      edit: 79
+
+  editor = new EpicEditor(opts).load()
+
+  editor.on "update", (data) ->
+    textarea.val data.content

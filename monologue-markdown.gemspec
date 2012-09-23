@@ -13,9 +13,11 @@ Gem::Specification.new do |s|
   s.summary     = "TODO: Summary of MonologueMarkdown."
   s.description = "TODO: Description of MonologueMarkdown."
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
 
   s.add_dependency "rails", "~> 3.2.8"
+  s.add_dependency "monologue"
+  s.add_dependency "deface"
 
   s.add_development_dependency "rspec-rails", "~> 2.11"
   s.add_development_dependency 'factory_girl_rails', '~> 4.1.0'

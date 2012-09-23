@@ -9,7 +9,9 @@ require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
 Bundler.require
+require "monologue"
 require "monologue-markdown"
+require "deface"
 
 module Dummy
   class Application < Rails::Application
