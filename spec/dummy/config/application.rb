@@ -12,6 +12,7 @@ Bundler.require
 require "monologue"
 require "monologue-markdown"
 require "deface"
+require "redcarpet"
 
 module Dummy
   class Application < Rails::Application

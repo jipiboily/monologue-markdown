@@ -10,7 +10,7 @@ $(document).ready ->
     parser: marked
     file:
       name: "epiceditor"
-      defaultContent: $(textarea).val()
+      defaultContent: ""
       autoSave: 100
 
     theme:
@@ -25,7 +25,12 @@ $(document).ready ->
       preview: 80
       edit: 79
 
-  editor = new EpicEditor(opts).load()
+  editor = new EpicEditor(opts)
+
+  editor.on "load", (data) ->
+    editor.importFile('epiceditor',$(textarea).val())
 
   editor.on "update", (data) ->
     textarea.val data.content
+
+  editor.load()
