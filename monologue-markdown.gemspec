@@ -7,11 +7,11 @@ require "monologue-markdown/version"
 Gem::Specification.new do |s|
   s.name        = "monologue-markdown"
   s.version     = MonologueMarkdown::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of MonologueMarkdown."
-  s.description = "TODO: Description of MonologueMarkdown."
+  s.authors     = ["Jean-Philippe Boily"]
+  s.email       = ["j@jipi.ca"]
+  s.homepage    = "https://github.com/jipiboily/monologue-markdown"
+  s.summary     = "A small and simple efficient extension to Monologue that replace the default WYSIWYG editor with a Markdown editor."
+  s.description = "A small and simple efficient extension to Monologue that replace the default WYSIWYG editor with a Markdown editor."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
 
