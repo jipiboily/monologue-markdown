@@ -1,36 +1,58 @@
+class MonologueMarkdown
+  constructor: ->
+    @textarea = $("#post_posts_revision_content")
+    @opts =
+      container: "epiceditor"
+      basePath: ""
+      clientSideStorage: true
+      localStorageName: "epiceditor"
+      parser: marked
+      file:
+        name: "epiceditor"
+        defaultContent: ""
+        autoSave: 100
+
+      theme:
+        base: "<%= asset_path("monologue-markdown/epiceditor/themes/base/epiceditor.css")%>"
+        preview: "<%= asset_path("monologue-markdown/epiceditor/themes/preview/github.css")%>"
+        editor: "<%= asset_path("monologue-markdown/epiceditor/themes/editor/epic-dark.css")%>"
+
+      focusOnLoad: false
+      shortcut:
+        modifier: 18
+        fullscreen: 70
+        preview: 80
+        edit: 79
+    $(@textarea).after("<div id='epiceditor'></div>")
+    $(@textarea).hide()
+    that = @
+
+    editor = new EpicEditor(@opts)
+
+    editor.on "load", (data) ->
+      editor.importFile('epiceditor',$(that.textarea).val())
+
+    editor.on "update", (data) ->
+      that.update_content(data)
+
+    editor.load()
+
+    $("form").submit (e) ->
+      editor.emit("update")
+  update_content: (data) =>
+    # forcing unload of tinymce to make sure it doesn't add stuff in our neat content
+    @force_unload_tiny_mce()
+    # update content with our awesome markdown
+    @textarea.val data.content
+
+  force_unload_tiny_mce: =>
+    try
+      tinymce.get(0).remove()
+      $(".mceEditor").remove()
+    catch e
+      # well, it looks like TinyMCE wasn't load for some reason anyway
+
+
 $(document).ready ->
-  textarea = $("#post_posts_revision_content")
-  $(textarea).after("<div id='epiceditor'></div>")
-  $(textarea).hide()
-  opts =
-    container: "epiceditor"
-    basePath: ""
-    clientSideStorage: true
-    localStorageName: "epiceditor"
-    parser: marked
-    file:
-      name: "epiceditor"
-      defaultContent: ""
-      autoSave: 100
-
-    theme:
-      base: "<%= asset_path("monologue-markdown/epiceditor/themes/base/epiceditor.css")%>"
-      preview: "<%= asset_path("monologue-markdown/epiceditor/themes/preview/github.css")%>"
-      editor: "<%= asset_path("monologue-markdown/epiceditor/themes/editor/epic-dark.css")%>"
-
-    focusOnLoad: false
-    shortcut:
-      modifier: 18
-      fullscreen: 70
-      preview: 80
-      edit: 79
-
-  editor = new EpicEditor(opts)
-
-  editor.on "load", (data) ->
-    editor.importFile('epiceditor',$(textarea).val())
-
-  editor.on "update", (data) ->
-    textarea.val data.content
-
-  editor.load()
+  return if $("#is_markdown").html() == "false"
+  new MonologueMarkdown()
