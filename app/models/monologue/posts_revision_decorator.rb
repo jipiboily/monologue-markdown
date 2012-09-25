@@ -1,5 +1,5 @@
 Monologue::PostsRevision.class_eval do
-  before_create do
+  before_validation do
     if self.post.posts_revision_id.nil?
       self.is_markdown = true
     else
