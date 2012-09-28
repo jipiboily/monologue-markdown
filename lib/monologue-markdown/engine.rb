@@ -11,7 +11,7 @@ module MonologueMarkdown
     config.generators.integration_tool :rspec
 
     initializer :assets do |config|
-      Rails.application.config.assets.precompile += %w( base/epiceditor.css editor/epic-dark.css preview/github.css )
+      Rails.application.config.assets.precompile += %w( monologue-markdown/epiceditor/themes/base/epiceditor.css monologue-markdown/epiceditor/themes/editor/epic-dark.css monologue-markdown/epiceditor/themes/preview/github.css )
     end
 
     def self.activate
