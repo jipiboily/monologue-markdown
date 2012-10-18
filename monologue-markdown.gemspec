@@ -19,6 +19,8 @@ Gem::Specification.new do |s|
   s.add_dependency "monologue"
   s.add_dependency "deface"
   s.add_dependency "redcarpet"
+  s.add_dependency "jquery-rails"
+
 
   s.add_development_dependency "rspec-rails", "~> 2.11"
   s.add_development_dependency 'factory_girl_rails', '~> 4.1.0'
