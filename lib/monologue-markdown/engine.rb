@@ -1,5 +1,5 @@
 require "deface"
-require "redcarpet"
+require 'content/pipeline'
 
 module MonologueMarkdown
   class Engine < ::Rails::Engine
@@ -12,6 +12,7 @@ module MonologueMarkdown
 
     initializer :assets do |config|
       Rails.application.config.assets.precompile += %w( monologue-markdown/epiceditor/themes/base/epiceditor.css monologue-markdown/epiceditor/themes/editor/epic-dark.css monologue-markdown/epiceditor/themes/preview/github.css )
+      Rails.application.config.assets.precompile += %w( monologue-markdown/code-highlighting.css)
     end
 
     def self.activate

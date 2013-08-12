@@ -13,8 +13,8 @@ Monologue::PostsRevision.class_eval do
 
   def content
     if self.is_markdown? && !in_admin?(caller)
-      markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
-      return markdown.render(read_attribute(:content))
+      pipeline = Content::Pipeline.new([Content::Pipeline::Filters::Markdown, Content::Pipeline::Filters::CodeHighlight], markdown: { type: :gfm, safe: true })
+      return pipeline.filter(read_attribute(:content))
     end
     read_attribute(:content)
   end
