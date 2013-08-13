@@ -13,8 +13,8 @@ Monologue::PostsRevision.class_eval do
 
   def content
     if self.is_markdown? && !in_admin?(caller)
-      pipeline = Content::Pipeline.new([Content::Pipeline::Filters::Markdown, Content::Pipeline::Filters::CodeHighlight], markdown: { type: :gfm, safe: false })
-      return pipeline.filter(read_attribute(:content))
+      pipeline = Content::Pipelinew.new
+      return pipeline.filter(read_attribute(:content), markdown: { type: :gfm, safe: false })
     end
     read_attribute(:content)
   end
