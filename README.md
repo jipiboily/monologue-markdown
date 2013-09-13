@@ -13,6 +13,9 @@ Then run this:
     bundle exec rake monologue_markdown:install:migrations
     bundle exec rake db:migrate
 
+### For Code Highlighting
+
+sudo easy_install Pygments
 
 ## Install on an already existing Monologue installation
 
