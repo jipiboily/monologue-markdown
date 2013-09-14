@@ -1,19 +1,17 @@
-Monologue::PostsRevision.class_eval do
+Monologue::Post.class_eval do
   before_validation do
-    if self.post.nil? || self.post.posts_revision_id.nil?
+    if self.new_record?
       self.is_markdown = true
-    else
-      self.is_markdown = self.post.active_revision.is_markdown
     end
   end
 
   def is_markdown?
-    self.is_markdown != false
+    self.is_markdown == true
   end
 
   def content
     if self.is_markdown? && !in_admin?(caller)
-      pipeline = Content::Pipelinew.new
+      pipeline = Content::Pipeline.new
       return pipeline.filter(read_attribute(:content), markdown: { type: :gfm, safe: false })
     end
     read_attribute(:content)

@@ -1,11 +1,11 @@
 class MonologueMarkdown
   constructor: ->
-    @textarea = $("#post_posts_revision_content")
+    @textarea = $("#post_content")
     @opts =
       container: "epiceditor"
       basePath: ""
+      clientSideStorage: false
       clientSideStorage: true
-      localStorageName: "epiceditor"
       parser: marked
       file:
         name: "epiceditor"
@@ -23,34 +23,44 @@ class MonologueMarkdown
         fullscreen: 70
         preview: 80
         edit: 79
+
+    @initEpicEditor()
+    @bindEvents()
+    @removeDefaultEditor() # remove CKEDITOR right now if it is already loaded
+
+  initEpicEditor: ->
     $(@textarea).after("<div id='epiceditor'></div>")
     $(@textarea).hide()
-    that = @
+    @editor = new EpicEditor(@opts)
+    @bindEpicEvents()
+    @editor.load()
 
-    editor = new EpicEditor(@opts)
+  bindEpicEvents: ->
+    @editor.on "load", (data) =>
+      @editor.importFile('epiceditor',$(@textarea).val())
 
-    editor.on "load", (data) ->
-      editor.importFile('epiceditor',$(that.textarea).val())
+    @editor.on "update", (data) =>
+      @update_content(data)
 
-    editor.on "update", (data) ->
-      that.update_content(data)
+  bindEvents: ->
+    $("form").submit (e) =>
+      @editor.emit("update")
 
-    editor.load()
+    # removing CKEDITOR when loaded
+    CKEDITOR.on 'instanceReady', =>
+      @removeDefaultEditor()
 
-    $("form").submit (e) ->
-      editor.emit("update")
   update_content: (data) =>
-    # forcing unload of tinymce to make sure it doesn't add stuff in our neat content
-    @force_unload_tiny_mce()
     # update content with our awesome markdown
     @textarea.val data.content
 
-  force_unload_tiny_mce: =>
+  removeDefaultEditor: =>
     try
-      tinymce.get(0).remove()
-      $(".mceEditor").remove()
-    catch e
-      # well, it looks like TinyMCE wasn't load for some reason anyway
+      CKEDITOR.instances["post_content"].destroy(true)
+      $(@textarea).hide()
+    catch
+      #
+    $('#cke_post_content').remove()
 
 
 $(document).ready ->
