@@ -1,4 +1,4 @@
-# monologue-markdown edition
+# monologue-markdown
 
 This is a simple extension that will change [Monologue](https://github.com/jipiboily/monologue)'s default editor to EpicEditor which will let you use Markdown instead of a WYSIWYG edit.
 
