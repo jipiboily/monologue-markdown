@@ -58,7 +58,7 @@ class MonologueMarkdown
     try
       CKEDITOR.instances["post_content"].destroy(true)
       $(@textarea).hide()
-    catch
+    catch error
       #
     $('#cke_post_content').remove()
 
