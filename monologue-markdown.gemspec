@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "deface", "~> 1.0.0.rc3"
   s.add_dependency "github-markdown", "~> 0.5.3"
   s.add_dependency 'content-pipeline', "~> 1.0"
-  s.add_dependency "pygments.rb", "~> 0.5.2"
+  s.add_dependency "pygments.rb", "~> 0.5.4"
   s.add_dependency "jquery-rails"
 
   s.add_development_dependency "rspec-rails", "~> 2.11"
