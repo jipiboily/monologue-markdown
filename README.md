@@ -28,7 +28,3 @@ sudo easy_install Pygments
 There are [Deface](https://github.com/railsdog/deface/) overrides with this project. You might want to (read: "should") turn it off on production. If you do, you can add a Capistrano task to precompile them or precompile them locally.
 
 [Read more about this here.](https://github.com/railsdog/deface/#production--precompiling)
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jipiboily/monologue-markdown/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
